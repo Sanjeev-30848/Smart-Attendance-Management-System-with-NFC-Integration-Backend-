@@ -1,5 +1,6 @@
 package com.klef.attendance.service;
 
-public class EventService {
+public interface EventService {
 
+    
 }

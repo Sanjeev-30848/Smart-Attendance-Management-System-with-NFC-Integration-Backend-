@@ -1,5 +1,7 @@
 package com.klef.attendance.service;
 
-public interface EventServiceImpl {
 
+public class EventServiceImpl implements EventService {
+
+    
 }
