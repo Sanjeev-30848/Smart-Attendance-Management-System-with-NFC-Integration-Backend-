@@ -13,13 +13,17 @@ public interface StudentService {
 
     StudentDTO getStudentById(Long id);
 
-    StudentDTO getStudentByUniversityId(String universityId);
+    StudentDTO getStudentByUniversityId(
+            String universityId);
 
-    Student getStudentEntityByUniversityId(String universityId);
+    Student getStudentEntityByUniversityId(
+            String universityId);
 
     StudentDTO getStudentByNfcUid(String uid);
 
-    StudentDTO updateStudent(Long id, StudentDTO dto);
+    StudentDTO updateStudent(
+            Long id,
+            StudentDTO dto);
 
     void deleteStudent(Long id);
 }

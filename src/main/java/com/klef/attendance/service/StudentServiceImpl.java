@@ -50,50 +50,12 @@ public class StudentServiceImpl implements StudentService {
 
         Student student = studentRepository.findById(id)
                 .orElseThrow(() ->
-                        new ResourceNotFoundException("Student not found"));
+                        new ResourceNotFoundException(
+                                "Student not found"));
 
         return mapToDTO(student);
     }
 
-    @Override
-    public StudentDTO getStudentByUniversityId(String universityId) {
-
-        Student student = studentRepository.findByUniversityId(universityId)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException("Student not found"));
-
-        return mapToDTO(student);
-    }
-
-    @Override
-    public StudentDTO getStudentByNfcUid(String uid) {
-
-        Student student = studentRepository.findByNfcCardUid(uid)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException("Card not registered"));
-
-        return mapToDTO(student);
-    }
-
-    @Override
-    public StudentDTO updateStudent(Long id, StudentDTO dto) {
-
-        Student student = studentRepository.findById(id)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException("Student not found"));
-
-        student.setStudentName(dto.getStudentName());
-        student.setEmail(dto.getEmail());
-        student.setBranch(dto.getBranch());
-        student.setYear(dto.getYear());
-        student.setNfcCardUid(dto.getNfcCardUid());
-        student.setSilPoints(dto.getSilPoints());
-
-        Student updated = studentRepository.save(student);
-
-        return mapToDTO(updated);
-    }
-    
     @Override
     public StudentDTO getStudentByUniversityId(
             String universityId) {
@@ -108,11 +70,60 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public Student getStudentEntityByUniversityId(
+            String universityId) {
+
+        return studentRepository
+                .findByUniversityId(universityId)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Student not found"));
+    }
+
+    @Override
+    public StudentDTO getStudentByNfcUid(
+            String uid) {
+
+        Student student = studentRepository
+                .findByNfcCardUid(uid)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Card not registered"));
+
+        return mapToDTO(student);
+    }
+
+    @Override
+    public StudentDTO updateStudent(
+            Long id,
+            StudentDTO dto) {
+
+        Student student = studentRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Student not found"));
+
+        student.setStudentName(dto.getStudentName());
+        student.setUniversityId(dto.getUniversityId());
+        student.setEmail(dto.getEmail());
+        student.setBranch(dto.getBranch());
+        student.setYear(dto.getYear());
+        student.setNfcCardUid(dto.getNfcCardUid());
+        student.setSilPoints(dto.getSilPoints());
+
+        Student updatedStudent =
+                studentRepository.save(student);
+
+        return mapToDTO(updatedStudent);
+    }
+
+    @Override
     public void deleteStudent(Long id) {
 
         Student student = studentRepository.findById(id)
                 .orElseThrow(() ->
-                        new ResourceNotFoundException("Student not found"));
+                        new ResourceNotFoundException(
+                                "Student not found"));
 
         studentRepository.delete(student);
     }
@@ -129,16 +140,5 @@ public class StudentServiceImpl implements StudentService {
                 .nfcCardUid(student.getNfcCardUid())
                 .silPoints(student.getSilPoints())
                 .build();
-    }
-
-    @Override
-    public Student getStudentEntityByUniversityId(
-            String universityId) {
-
-        return studentRepository
-                .findByUniversityId(universityId)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException(
-                                "Student not found"));
     }
 }
