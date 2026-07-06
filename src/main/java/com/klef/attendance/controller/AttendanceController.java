@@ -1,15 +1,15 @@
 package com.klef.attendance.controller;
 
 import java.util.List;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import com.klef.attendance.entity.Attendance;
 import com.klef.attendance.service.AttendanceService;
-
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 
+
+@SuppressWarnings("unused")
 @RestController
 @RequestMapping("/api/attendance")
 @RequiredArgsConstructor

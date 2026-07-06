@@ -8,12 +8,14 @@ import org.springframework.web.bind.annotation.*;
 import com.klef.attendance.dto.StudentDTO;
 import com.klef.attendance.service.StudentService;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/students")
 @RequiredArgsConstructor
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
+@SecurityRequirement(name = "Bearer Authentication")
 public class StudentController {
 
     private final StudentService studentService;
@@ -35,14 +37,12 @@ public class StudentController {
     }
 
     @GetMapping("/university/{universityId}")
-    public StudentDTO getStudentByUniversityId(
-            @PathVariable String universityId) {
+    public StudentDTO getStudentByUniversityId(@PathVariable String universityId) {
         return studentService.getStudentByUniversityId(universityId);
     }
 
     @GetMapping("/nfc/{uid}")
-    public StudentDTO getStudentByNfcUid(
-            @PathVariable String uid) {
+    public StudentDTO getStudentByNfcUid(@PathVariable String uid) {
         return studentService.getStudentByNfcUid(uid);
     }
 

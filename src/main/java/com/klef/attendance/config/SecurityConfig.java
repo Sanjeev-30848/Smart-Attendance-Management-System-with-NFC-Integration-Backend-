@@ -47,10 +47,18 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
 
                         // Public APIs
-                        .requestMatchers(
-                                "/api/auth/**",
-                                "/error")
-                        .permitAll()
+                		.requestMatchers(
+                		        "/api/auth/**",
+
+                		        "/swagger-ui/**",
+                		        "/swagger-ui.html",
+
+                		        "/v3/api-docs/**",
+                		        "/v3/api-docs",
+
+                		        "/error"
+                		)
+                		.permitAll()
 
                         // Secure all remaining APIs
                         .anyRequest()
