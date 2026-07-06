@@ -32,38 +32,23 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             FilterChain filterChain)
             throws ServletException, IOException {
 
-        System.out.println("\n==========================================");
-        System.out.println("JWT Authentication Filter Executed");
-        System.out.println("Request URI : " + request.getRequestURI());
-
         final String authHeader = request.getHeader("Authorization");
-
-        System.out.println("Authorization Header : " + authHeader);
 
         String jwt = null;
         String email = null;
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-
-            System.out.println("No Bearer Token Found!");
-
             filterChain.doFilter(request, response);
             return;
         }
 
         jwt = authHeader.substring(7);
 
-        System.out.println("JWT Token : " + jwt);
-
         try {
 
             email = jwtUtil.extractUsername(jwt);
 
-            System.out.println("Email Extracted : " + email);
-
         } catch (ExpiredJwtException e) {
-
-            System.out.println("JWT Token Expired!");
 
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.setContentType("application/json");
@@ -78,9 +63,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
 
         } catch (Exception e) {
-
-            System.out.println("Invalid JWT!");
-            e.printStackTrace();
 
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.setContentType("application/json");
@@ -101,13 +83,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             UserDetails userDetails =
                     userDetailsService.loadUserByUsername(email);
 
-            System.out.println("User Loaded : " + userDetails.getUsername());
-            System.out.println("Authorities : " + userDetails.getAuthorities());
-
             boolean valid =
                     jwtUtil.validateToken(jwt, userDetails.getUsername());
-
-            System.out.println("Token Valid : " + valid);
 
             if (valid) {
 
@@ -124,19 +101,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 SecurityContextHolder
                         .getContext()
                         .setAuthentication(authToken);
-
-                System.out.println("Authentication Successful!");
-                System.out.println("Security Context : "
-                        + SecurityContextHolder.getContext().getAuthentication());
-
-            } else {
-
-                System.out.println("Token Validation Failed!");
             }
         }
-
-        System.out.println("JWT Filter Completed");
-        System.out.println("==========================================\n");
 
         filterChain.doFilter(request, response);
     }
