@@ -1,5 +1,7 @@
 package com.klef.attendance.dto;
 
+import com.klef.attendance.entity.Role;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,10 +13,14 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class LoginResponse {
+public class RegisterRequest {
 
-    private String token;
+    private String username;
 
-    private String message;
+    private String email;
+
+    private String password;
+
+    private Role role;
 
 }
