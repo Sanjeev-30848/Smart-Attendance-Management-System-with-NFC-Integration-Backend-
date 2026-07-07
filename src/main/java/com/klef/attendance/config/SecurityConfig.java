@@ -49,7 +49,7 @@ public class SecurityConfig {
                         // Public APIs
                 		.requestMatchers(
                 		        "/api/auth/**",
-
+                		        "/api/students/**",
                 		        "/swagger-ui/**",
                 		        "/swagger-ui.html",
 

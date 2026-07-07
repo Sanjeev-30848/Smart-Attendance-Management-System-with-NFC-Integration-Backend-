@@ -15,12 +15,12 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/api/students")
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*")
-@SecurityRequirement(name = "Bearer Authentication")
 public class StudentController {
 
     private final StudentService studentService;
 
     @PostMapping
+//    @SecurityRequirement(name = "Bearer Authentication")
     @ResponseStatus(HttpStatus.CREATED)
     public StudentDTO addStudent(@RequestBody StudentDTO studentDTO) {
         return studentService.addStudent(studentDTO);
