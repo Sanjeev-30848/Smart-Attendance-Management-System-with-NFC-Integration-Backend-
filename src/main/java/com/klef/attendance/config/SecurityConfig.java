@@ -49,7 +49,7 @@ public class SecurityConfig {
                         // Public APIs
                 		.requestMatchers(
                 		        "/api/auth/**",
-                		        "/api/students/**",
+                		        "/api/students/**", 
                 		        "/swagger-ui/**",
                 		        "/swagger-ui.html",
 
@@ -59,8 +59,6 @@ public class SecurityConfig {
                 		        "/error"
                 		)
                 		.permitAll()
-
-                        // Secure all remaining APIs
                         .anyRequest()
                         .authenticated())
 
