@@ -20,7 +20,7 @@ public class StudentController {
     private final StudentService studentService;
 
     @PostMapping
-//    @SecurityRequirement(name = "Bearer Authentication")
+//    @SecurityRequirement(name = "Bearer Authentication") // commented out to bypass security issue
     @ResponseStatus(HttpStatus.CREATED)
     public StudentDTO addStudent(@RequestBody StudentDTO studentDTO) {
         return studentService.addStudent(studentDTO);
